@@ -3,6 +3,7 @@ set(CONTROL_SOURCES
     pid_controller.cpp
     lqr_controller.cpp
     state_space.cpp
+    kalman_filter.cpp
 )
 
 # Create library

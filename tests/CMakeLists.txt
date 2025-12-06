@@ -7,6 +7,7 @@ set(TEST_SOURCES
     test_lqr.cpp
     test_state_space.cpp
     test_main.cpp
+    test_kalman.cpp
 )
 
 # Create test executable

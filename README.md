@@ -7,6 +7,7 @@ A modern C++ control library for robotics with PID and LQR controllers.
 - **PID Controller**: Discrete-time with integral anti-windup and saturation
 - **LQR Controller**: Linear Quadratic Regulator for state feedback
 - **State-Space Models**: Discrete-time linear systems
+- **Kalman-Filter**: Discrete-time Kalman Filter for linear systems
 - **Unit Tests**: Comprehensive test coverage with GoogleTest
 - **CMake Build**: Modern CMake-based build system
 
@@ -54,7 +55,10 @@ ctest --output-on-failure
 ## Project Structure
 ```text
 robotics_control_cpp/
-├── include/control/      # Header files
+├── examples/              # Example Implementation
+├── include/              # Header files
+    ├── control/
+    ├── estimation/
 ├── src/                  # Implementation files
 ├── tests/                # Unit tests
 └── CMakeLists.txt       # Build configuration
@@ -96,11 +100,31 @@ LQRController lqr(K);
 VectorXd u = lqr.compute_input(state);
 ```
 
+### KalmanFilter
+Discrete-time Kalman Filter for linear systems.
+
+```text
+State estimate with covariance:
+    x_hat[k|k] := E[x[k]  | measurements up to k]
+    P[k|k] := covariance of estimation error
+Prediction: 
+    x_hat[k|k-1] = A*x_hat[k-1|k-1] + B*u[k-1]
+    P[k|k-1] = A*P[k-1|k-1]*A' + Q
+Measurement Update:
+    K[k] = P[k|k-1]*C' / (C*P[k|k-1]*C' + R)
+    x_hat[k|k] = x_hat[k|k-1] + K[k]*(z[k] - c*x[_hat[k|k-1]])
+    P[k|k] = (I - K[k] *C) * P[k|k-1]
+```
+```bash
+KalmanFilter kf(A, B, C, Q, R, P0, x0);
+kf.measurement_update(z);
+kf.prediction_update(VectorXd::Zero(1));
+```
+
 ## Example: 2D Point Mass Control
 See src/main.cpp for a complete example of controlling a 2D point mass to a target position using a PID controller.
 
 ## Future Enhancements
-- Kalman filter implementation
 - MPC (Model Predictive Control) solver
 - LTI discrete-time optimal control
 - Observer design for state estimation
