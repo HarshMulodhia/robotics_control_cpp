@@ -368,8 +368,8 @@ Eigen::VectorXd u = lqr.ComputeControl(state);
 - [x] Example programs (10 transform examples)
 
 ### 🔄 In Progress (Month 2)
-- [ ] LQR controller implementation
-- [ ] Kalman filter
+- [x] LQR controller implementation
+- [x] Kalman filter
 - [ ] ROS2 integration
 - [ ] Gazebo simulation
 - [ ] URDF support
@@ -408,20 +408,6 @@ git push origin feature/new-feature
 
 ---
 
-## 📋 Project Statistics
-
-| Metric | Value |
-|--------|-------|
-| **Lines of Code** | 1,650+ |
-| **Classes** | 4 (Transform module) |
-| **Public Methods** | 100+ |
-| **Unit Tests** | 30+ |
-| **Examples** | 10+ |
-| **Code Coverage** | >80% |
-| **Dependencies** | 1 (Eigen3) |
-| **Performance** | <1µs per operation |
-
----
 
 ## 🎯 Use Cases
 
@@ -447,44 +433,6 @@ git push origin feature/new-feature
 
 ---
 
-## 📝 License
-
-MIT License - See LICENSE file for details
-
-```
-Copyright (c) 2025 Harsh Mulodhia
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software...
-```
-
----
-
-## 🙌 Acknowledgments
-
-- **Modern Robotics by Lynch & Park** - Core theory and algorithms
-- **Eigen Library** - Excellent linear algebra support
-- **3Blue1Brown** - Intuitive visual explanations
-- **ROS Community** - Standards and best practices
-
----
-
-## 📞 Contact & Support
-
-**Author:** Harsh Mulodhia  
-**Email:** harsh.mulodhia@example.com  
-**GitHub:** [@HarshMulodhia](https://github.com/HarshMulodhia)  
-**LinkedIn:** [Harsh Mulodhia](https://linkedin.com/in/harsh-mulodhia)  
-
-**Issues & Questions:**
-- Open an issue on GitHub
-- Check existing documentation
-- Refer to examples for usage patterns
-
----
 
 ## ✨ Next Steps for Development
 
@@ -514,15 +462,6 @@ copies of the Software...
 
 ---
 
-## 🚀 Version History
-
-| Version | Date | Highlights |
-|---------|------|-----------|
-| **1.1** | Dec 7, 2025 | Transform consolidation (removed constants.h) |
-| **1.0** | Dec 1, 2025 | Initial release: Transform module, PID, examples |
-| **0.1** | Nov 15, 2025 | Project setup and planning |
-
----
 
 **Made with ❤️ for the robotics and autonomous vehicle community**
 
