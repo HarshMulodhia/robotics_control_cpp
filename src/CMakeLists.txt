@@ -4,6 +4,7 @@ set(CONTROL_SOURCES
     lqr_controller.cpp
     state_space.cpp
     kalman_filter.cpp
+    transform.cpp
 )
 
 # Create library

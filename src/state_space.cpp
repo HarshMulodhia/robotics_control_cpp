@@ -1,5 +1,6 @@
 #include "control/state_space.hpp"
 
+using namespace Eigen;
 namespace robotics_control {
 
 StateSpace::StateSpace(const MatrixXd& A, const MatrixXd& B,

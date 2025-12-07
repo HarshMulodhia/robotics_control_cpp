@@ -1,5 +1,6 @@
 #include "estimation/kalman_filter.hpp"
 
+using namespace Eigen;
 namespace robotics_control {
 
 KalmanFilter::KalmanFilter(const MatrixXd& A, const MatrixXd& B, 

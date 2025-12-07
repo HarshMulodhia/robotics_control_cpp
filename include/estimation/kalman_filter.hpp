@@ -1,7 +1,6 @@
 #pragma once
 
 #include<eigen3/Eigen/Dense>
-using namespace Eigen;
 
 namespace robotics_control {
 
@@ -25,11 +24,11 @@ namespace robotics_control {
 class KalmanFilter {
 
 private:
-    MatrixXd A_, B_, C_;    //System Matrices
-    MatrixXd Q_, R_;    //Noise covariances
-    VectorXd x_hat_;    //State Estimate
-    MatrixXd P_, K_;    // Estimate covariance and Kalman Gain
-    MatrixXd I_;    //Identity Matrix
+    Eigen::MatrixXd A_, B_, C_;    //System Matrices
+    Eigen::MatrixXd Q_, R_;    //Noise covariances
+    Eigen::VectorXd x_hat_;    //State Estimate
+    Eigen::MatrixXd P_, K_;    // Estimate covariance and Kalman Gain
+    Eigen::MatrixXd I_;    //Identity Matrix
 public:
     /**
      * @brief Constructor
@@ -41,40 +40,40 @@ public:
      * @param P0 Initial state covariance
      * @param x0 Initial state estimate
      */
-    KalmanFilter(const MatrixXd& A, const MatrixXd& B, const MatrixXd& C,
-    const MatrixXd& Q, const MatrixXd& R, const MatrixXd& P0, const VectorXd& x0);
+    KalmanFilter(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B, const Eigen::MatrixXd& C,
+    const Eigen::MatrixXd& Q, const Eigen::MatrixXd& R, const Eigen::MatrixXd& P0, const Eigen::VectorXd& x0);
 
     /**
      * @brief Prediction update
      * @param u Contol input
      */
-    void prediction_update(const VectorXd& u);
+    void prediction_update(const Eigen::VectorXd& u);
 
     /**
      * @brief Measurement update
      * @param z Measurement vector
      */
-    void measurement_update(const VectorXd& z);
+    void measurement_update(const Eigen::VectorXd& z);
 
     /**
      * @brief Get state estimate
      */
-    VectorXd get_state() const {return x_hat_;}
+    Eigen::VectorXd get_state() const {return x_hat_;}
 
     /**
      * @brief Get convariance, P
      */
-    MatrixXd get_covariance() const {return P_;}
+    Eigen::MatrixXd get_covariance() const {return P_;}
 
     /**
      * @brief Get Kalman gain
      */
-    MatrixXd get_kalman_gain() const { return K_;}
+    Eigen::MatrixXd get_kalman_gain() const { return K_;}
 
     /**
      * @brief Reset filter
      */
-    void reset(const VectorXd& x0, const MatrixXd& P0);
+    void reset(const Eigen::VectorXd& x0, const Eigen::MatrixXd& P0);
 };
 
 }

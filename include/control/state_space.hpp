@@ -1,7 +1,6 @@
 #pragma once
 
 #include <eigen3/Eigen/Dense>
-using namespace Eigen;
 
 namespace robotics_control {
 /**
@@ -17,8 +16,8 @@ class StateSpace
 {
     
 private:
-    MatrixXd A_, B_, C_, D_;
-    VectorXd state_;
+    Eigen::MatrixXd A_, B_, C_, D_;
+    Eigen::VectorXd state_;
 public:
     /**
      * @brief Constructor
@@ -27,15 +26,15 @@ public:
      * @param C Output matrix (pxn)
      * @param D Feedthrough matrix (pxm)
      */
-    StateSpace(const MatrixXd& A, const MatrixXd& B,
-    const MatrixXd& C, const MatrixXd& D);
+    StateSpace(const Eigen::MatrixXd& A, const Eigen::MatrixXd& B,
+    const Eigen::MatrixXd& C, const Eigen::MatrixXd& D);
 
     /**
      * @brief Step the system forward in time
      * @param u Control input
      * @return Output y[k]
      */
-    VectorXd step(const VectorXd& u);
+    Eigen::VectorXd step(const Eigen::VectorXd& u);
 
     /**
      * @brief Reset state to zero
@@ -45,12 +44,12 @@ public:
     /**
      * @brief Set State
      */
-    void set_state(const VectorXd& x) {state_ = x;}
+    void set_state(const Eigen::VectorXd& x) {state_ = x;}
 
     /**
      * @brief Get current state
      */
-    VectorXd get_state() const {return state_;}
+    Eigen::VectorXd get_state() const {return state_;}
 
 };
 

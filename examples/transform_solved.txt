@@ -1,0 +1,188 @@
+
+╔════════════════════════════════════════════════════════════════════╗
+║         Robotics Transform Library - Examples Demo                  ║
+║   Modern C++ Control Library for Autonomous Vehicles                ║
+╚════════════════════════════════════════════════════════════════════╝
+
+======================================================================
+Example 1: Quaternion Basics
+======================================================================
+
+1a. Create identity quaternion:
+Quaternion(w=1.000000, x=0.000000, y=0.000000, z=0.000000)
+Is identity: YES
+
+1b. Create quaternion from components:
+Quaternion(w=0.707107, x=0.707107, y=0.000000, z=0.000000)
+
+1c. Create quaternion from axis-angle:
+Axis: [0, 0, 1], Angle: 45°
+Quaternion(w=0.923880, x=0.000000, y=0.000000, z=0.382683)
+
+1d. Get back axis-angle representation:
+Reconstructed Axis: [0, 0, 1]
+Reconstructed Angle: 45°
+
+======================================================================
+Example 2: Rotation Matrix Creation
+======================================================================
+
+2a. Create rotation around Z by 90°:
+R =
+ 0  0  1
+-1  0  0
+ 0 -1  0
+Is orthogonal: YES
+Is proper rotation (det=1): YES
+
+2b. Compose two rotations (90° Z + 45° X):
+Composed rotation properties:
+- Orthogonal: YES
+- Proper: YES
+- Determinant: 1
+
+======================================================================
+Example 3: Point Transformation
+======================================================================
+
+3a. Rotate point [1, 0, 0] by 90° around Z:
+Original point: [1, 0, 0]
+Rotated point:  [0.000000, -1.000000, 0.000000]
+Expected (approx): [0, 1, 0]
+
+3b. Verify rotation properties:
+- Distance from origin preserved: YES
+- Original distance: 1.000000
+- Rotated distance:  1.000000
+
+======================================================================
+Example 4: Euler Angles and Conversions
+======================================================================
+
+4a. Create Euler angles (roll=30°, pitch=20°, yaw=45°):
+EulerAngles(roll=0.523599, pitch=0.349066, yaw=0.785398)
+Has gimbal lock: NO
+
+4b. Convert to rotation matrix and back:
+Original:      EulerAngles(roll=0.523599, pitch=0.349066, yaw=0.785398)
+Reconstructed: EulerAngles(roll=0.000000, pitch=1.570796, yaw=-2.181662) [GIMBAL LOCK]
+
+4c. Example of gimbal lock (pitch = 90°):
+EulerAngles(roll=0.000000, pitch=1.570796, yaw=0.000000) [GIMBAL LOCK]
+Note: At gimbal lock, you lose one degree of freedom
+
+======================================================================
+Example 5: Quaternion Interpolation (SLERP)
+======================================================================
+
+5a. Create two quaternions:
+q1 (0° rotation):  Quaternion(w=1.000000, x=0.000000, y=0.000000, z=0.000000)
+q2 (90° rotation): Quaternion(w=0.707107, x=0.000000, y=0.000000, z=0.707107)
+
+5b. Interpolate between them:
+t=0.00 -> angle=0.00°
+t=0.25 -> angle=22.50°
+t=0.50 -> angle=45.00°
+t=0.75 -> angle=67.50°
+t=1.00 -> angle=90.00°
+
+5c. Note: SLERP gives smooth, constant-velocity interpolation
+
+======================================================================
+Example 6: 3D Rigid Transformations (SE(3))
+======================================================================
+
+6a. Create a transformation (rotation + translation):
+Transform:
+R =
+-0.7071  0.0000  0.7071
+-0.7071  0.0000 -0.7071
+ 0.0000 -1.0000  0.0000
+t = [1.0000, 2.0000, 3.0000]ᵀ
+
+6b. Transform a point:
+Original point: [1.00, 0.00, 0.00]
+Transformed point: [1.0000, 2.0000, 4.0000]
+
+6c. Inverse transformation:
+After inverse transform: [-4.000000, 0.707107, 2.121320]
+Difference from original: 5.477226
+
+======================================================================
+Example 7: Composing Transformations
+======================================================================
+
+7a. Create two transformations:
+T1 = Rotation(90° Z) + Translation(1, 0, 0)
+T2 = Rotation(45° X) + Translation(0, 1, 0)
+
+7b. Compose transformations:
+Transform:
+R =
+ 0.0000 -0.7071 -0.7071
+-1.0000  0.0000  0.0000
+ 0.0000  0.7071 -0.7071
+t = [1.0000, 0.0000, -1.0000]ᵀ
+
+7c. Apply composed transformation to a point:
+Result from two-step: [1.000000, 1.000000, 1.000000]
+Result from composed: [1.000000, 1.000000, -1.000000]
+Difference: 2.000000
+
+======================================================================
+Example 8: Transform Interpolation
+======================================================================
+
+8a. Create start and end transforms:
+Start: Identity transform
+End:   90° rotation around Z + 2 units in X
+
+8b. Interpolate between transforms:
+t=0.0 -> Position: 0.000000 0.000000 0.000000
+t=0.25 -> Position: [0.50, 0.00, 0.00]
+t=0.50 -> Position: [1.00, 0.00, 0.00]
+t=0.75 -> Position: [1.50, 0.00, 0.00]
+t=1.0 -> Position: 2.00 0.00 0.00
+
+Note: Uses SLERP for rotation (smooth) and linear for translation
+
+======================================================================
+Example 9: Simplified Robot Kinematics
+======================================================================
+
+9a. Two-link robot arm:
+- Joint 1: Rotation around Z by theta1
+- Link 1: Length 1 unit along X
+- Joint 2: Rotation around Z by theta2
+- Link 2: Length 1 unit along X
+
+For theta1=45.00°, theta2=30.00°:
+
+End effector position: [0.2929, -0.7071, 0.0000]
+End effector orientation: Quaternion(w=-0.092296, x=-0.430459, y=0.560986, z=0.701057)
+
+======================================================================
+Example 10: Conversion Chain Between Representations
+======================================================================
+
+10a. Start with Euler angles:
+Original Euler angles: EulerAngles(roll=0.523599, pitch=0.785398, yaw=1.047198)
+
+10b. Convert to rotation matrix:
+Valid rotation matrix: YES
+
+10c. Convert to quaternion:
+Quaternion: Quaternion(w=0.565758, x=0.056043, y=0.565758, z=-0.597239)
+
+10d. Convert back to Euler angles:
+Reconstructed: EulerAngles(roll=-1.047198, pitch=0.785398, yaw=-2.094395)
+
+10e. Check consistency:
+Roll difference:  1.5708
+Pitch difference: 0.0000
+Yaw difference:   3.1416
+
+======================================================================
+All examples completed successfully!
+======================================================================
+
